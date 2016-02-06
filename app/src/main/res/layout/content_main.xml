@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/button_3"
-            android:onClick="openSceneTwo" >
+            android:onClick="openSceneThree" >
         </Button>
 
         <Button
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/button_4"
-            android:onClick="openSceneTwo" >
+            android:onClick="openSceneFour" >
         </Button>
 
         <Button
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/button_5"
-            android:onClick="openSceneTwo" >
+            android:onClick="openSceneFive" >
         </Button>
 
         <Button

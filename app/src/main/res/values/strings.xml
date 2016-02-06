@@ -9,8 +9,8 @@
     <string name="button_1">Google Drive</string>
     <string name="button_2">Dropbox</string>
     <string name="button_3">Box</string>
-    <string name="button_4">Scene 4</string>
-    <string name="button_5">Scene 5</string>
+    <string name="button_4">Google OAuth Try 1</string>
+    <string name="button_5">Google OAuth Try 2</string>
     <string name="button_6">Scene 6</string>
     <string name="button_7">Scene 7</string>
     <string name="button_8">Scene 8</string>
@@ -38,4 +38,6 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
+    <string name="found_account">Account found</string>
+    <string name="pick_account">Cancellation error</string>
 </resources>
