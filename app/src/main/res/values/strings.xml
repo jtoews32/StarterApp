@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Test Sample App</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="edit_message">Edit Message</string>
+
+    <string name="button_1">Google Drive</string>
+    <string name="button_2">Dropbox</string>
+    <string name="button_3">Box</string>
+    <string name="button_4">Scene 4</string>
+    <string name="button_5">Scene 5</string>
+    <string name="button_6">Scene 6</string>
+    <string name="button_7">Scene 7</string>
+    <string name="button_8">Scene 8</string>
+    <string name="button_9">Scene 9</string>
+    <string name="button_10">Scene 10</string>
+    <string name="button_11">Scene 11</string>
+    <string name="button_12">Scene 12</string>
+    <string name="button_13">Scene 13</string>
+    <string name="button_14">Scene 14</string>
+    <string name="button_15">Scene 15</string>
+    <string name="button_16">Scene 16</string>
+    <string name="button_17">Scene 17</string>
+    <string name="button_18">Scene 18</string>
+    <string name="button_19">Scene 19</string>
+    <string name="button_20">Scene 20</string>
+
+
+    <string name="title_activity_scene_one">Scene One</string>
+    <string name="title_activity_scene_two">Scene Two</string>
+    <string name="title_activity_scene_three">Scene Three</string>
+    <string name="title_activity_scene_four">Scene Four</string>
+    <string name="title_activity_scene_five">Scene Five</string>
+    <string name="title_activity_scene_six">Scene Six</string>
+    <string name="title_activity_scene_seven">Scene Seven</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+</resources>
