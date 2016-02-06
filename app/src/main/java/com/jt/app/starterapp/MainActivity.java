@@ -74,33 +74,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSceneTwo(View view) {
         Intent intent = new Intent(this, SceneTwoActivity.class);
-
-        // EditText editText = (EditText) findViewById(R.id.edit_message);
-        // String message = editText.getText().toString();
-        // intent.putExtra(INCOMING_MESSAGE, message);
-
         startActivity(intent);
     }
 
-    public void openSceneFive(View view) {
-        int rc = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-
-
-        /*
-        IntentSender intentSender = Drive.DriveApi
-                .newOpenFileActivityBuilder()
-                .setMimeType(new String[] { "text/plain", "text/html" })
-                .build(getGoogleApiClient());
-
-
-        try {
-            startIntentSenderForResult(
-                    intentSender, REQUEST_CODE_OPENER, null, 0, 0, 0);
-        } catch (IntentSender.SendIntentException e) {
-          //  Log.w(TAG, "Unable to send intent", e);
-        }*/
-
-
+    public void openSceneThree(View view) {
+        Intent intent = new Intent(this, SceneTwoActivity.class);
+        startActivity(intent);
     }
 
 
@@ -152,4 +131,29 @@ public class MainActivity extends AppCompatActivity {
         }
         // Handle the result from exceptions
     }
+
+
+
+
+    public void openSceneFive(View view) {
+        int rc = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+
+
+        /*
+        IntentSender intentSender = Drive.DriveApi
+                .newOpenFileActivityBuilder()
+                .setMimeType(new String[] { "text/plain", "text/html" })
+                .build(getGoogleApiClient());
+
+
+        try {
+            startIntentSenderForResult(
+                    intentSender, REQUEST_CODE_OPENER, null, 0, 0, 0);
+        } catch (IntentSender.SendIntentException e) {
+          //  Log.w(TAG, "Unable to send intent", e);
+        }*/
+
+
+    }
+
 }
