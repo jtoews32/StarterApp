@@ -19,14 +19,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.jt.app.SceneOneActivity"
+            android:name=".SceneOneActivity"
             android:label="@string/title_activity_scene_one" />
+
+
         <activity
             android:name=".SceneTwoActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_scene_two"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".SceneThreeActivity"></activity>
+        <activity android:name=".SceneThreeActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="file" />
+                <data android:mimeType="*/*" />
+                <data android:pathPattern=".*\\.prop" />
+                <data android:host="*" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
