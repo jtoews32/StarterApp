@@ -3,6 +3,7 @@ package com.jt.app.starterapp;
 import android.accounts.AccountManager;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+
+import com.dropbox.client2.DropboxAPI;
+import com.dropbox.client2.android.AndroidAuthSession;
+import com.dropbox.client2.session.AppKeyPair;
+import com.dropbox.client2.session.Session;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -137,8 +143,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSceneFive(View view) {
         int rc = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-
-
         /*
         IntentSender intentSender = Drive.DriveApi
                 .newOpenFileActivityBuilder()
@@ -152,8 +156,70 @@ public class MainActivity extends AppCompatActivity {
         } catch (IntentSender.SendIntentException e) {
           //  Log.w(TAG, "Unable to send intent", e);
         }*/
-
-
     }
+
+
+  //  final static private Session.AccessType ACCESS_TYPE = Session.AccessType.INSERT_APP_ACCESS_TYPE;
+    private static final String TOKEN = "token";
+    private static final String PREF_NAME = "dropbox";
+    final static private String APP_KEY = "o8h251y2hy64iy6";
+    final static private String APP_SECRET = "rdm2j4qcteh6oom";
+    private DropboxAPI<AndroidAuthSession> mDBApi;
+
+    public void openSceneSix(View view) {
+
+        AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
+        AndroidAuthSession session = new AndroidAuthSession(appKeys);
+        mDBApi = new DropboxAPI<AndroidAuthSession>(session);
+
+        // MyActivity below should be your activity class name
+        mDBApi.getSession().startOAuth2Authentication(MainActivity.this);
+    }
+
+    /*
+    public void storeOauth2AccessToken(String secret){
+        SharedPreferences preferences = context.getSharedPreferences(PREF_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(TOKEN, secret);
+        editor.commit();
+    }
+
+    public AndroidAuthSession loadAndroidAuthSession() {
+        SharedPreferences preferences = context.getSharedPreferences(PREF_NAME,
+                Context.MODE_PRIVATE);
+        String token = preferences.getString(TOKEN, null);
+        if (token != null) {
+            AppKeyPair appKeys = new AppKeyPair(APPKEY, APPKEYSECRET);
+            return new AndroidAuthSession(appKeys,token);
+        } else {
+
+            return null;
+        }
+    }
+
+    public boolean hasLoadAndroidAuthSession() {
+        return loadAndroidAuthSession() != null;
+    }*/
+
+
+    protected void onResume() {
+        super.onResume();
+        if (mDBApi.getSession().authenticationSuccessful()) {
+            try {
+                // Required to complete auth, sets the access token on the session
+                mDBApi.getSession().finishAuthentication();
+
+                String accessToken = mDBApi.getSession().getOAuth2AccessToken();
+            } catch (IllegalStateException e) {
+                // Log.i("DbAuthLog", "Error authenticating", e);
+            }
+        }
+    }
+
+    // Box Client Id	    005ondupkgds3aohptzajhn63kekdrb6
+    // Box Client Secret    0YMCONrgDol5knImxR1x5YwsRLYfZ8VR
+
+
 
 }
