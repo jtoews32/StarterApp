@@ -1,28 +1,28 @@
 package com.jt.app.starterapp;
 
+import android.Manifest;
 import android.accounts.AccountManager;
+import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
-import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AppKeyPair;
-import com.dropbox.client2.session.Session;
-import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.drive.Drive;
+
+import java.io.File;
+import java.io.FileOutputStream;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -70,11 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSceneOne(View view) {
         Intent intent = new Intent(this, SceneOneActivity.class);
-
         // EditText editText = (EditText) findViewById(R.id.edit_message);
         // String message = editText.getText().toString();
         // intent.putExtra(INCOMING_MESSAGE, message);
-
         startActivity(intent);
     }
 
@@ -100,16 +98,19 @@ public class MainActivity extends AppCompatActivity {
     // sha1: 71:E5:F7:E8:F7:0E:4D:3F:FA:96:D7:DA:13:17:91:4B:C1:89:F8:8C
     static final String starterAppOauthClientID = "908365666466-g7bau343ld8eidn7hik9dktc7k7876ac.apps.googleusercontent.com";
 
-    static final int REQUEST_CODE_OPENER = 1001;
-    static final int REQUEST_CODE_PICK_ACCOUNT = 1000;
+    private static final int BOX_REQUEST_AUTH_CODE = 1002;
+    static final int GOOGLE_REQUEST_CODE_OPENER = 1001;
+    static final int GOOGLE_REQUEST_CODE_PICK_ACCOUNT = 1000;
+
     String mEmail; // Received from newChooseAccountIntent(); passed to getToken()
 
+    // google Drive
     public void openSceneFour(View view) {
         try {
             String[] accountTypes = new String[]{"com.google", "com.google.android.legacyimap"}; // com.google"};
             Intent intent = AccountPicker.newChooseAccountIntent(null, null, accountTypes, false, null, null, null, null);
 
-            startActivityForResult(intent, REQUEST_CODE_PICK_ACCOUNT);
+            startActivityForResult(intent, GOOGLE_REQUEST_CODE_PICK_ACCOUNT);
 
         } catch (Exception e) {
             Exception d = e;
@@ -118,29 +119,36 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_PICK_ACCOUNT) {
-            // Receiving a result from the AccountPicker
-            if (resultCode == RESULT_OK) {
-                mEmail = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-                // With the account name acquired, go get the auth token
-                // getUsername();
-                Toast.makeText(this, R.string.found_account, Toast.LENGTH_SHORT).show();
+        switch (requestCode) {
+            case BOX_REQUEST_AUTH_CODE:
 
-            } else if (resultCode == RESULT_CANCELED) {
-                // The account picker dialog closed without selecting an account.
-                // Notify users that they must pick an account to proceed.
-                Toast.makeText(this, R.string.pick_account, Toast.LENGTH_SHORT).show();
-            } else if (resultCode == REQUEST_CODE_OPENER) {
 
-            }
+            break;
+            case GOOGLE_REQUEST_CODE_PICK_ACCOUNT:
+                // Receiving a result from the AccountPicker
+                if (resultCode == RESULT_OK) {
+                    mEmail = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+                    // With the account name acquired, go get the auth token
+                    // getUsername();
+                    Toast.makeText(this, R.string.found_account, Toast.LENGTH_SHORT).show();
+
+                } else if (resultCode == RESULT_CANCELED) {
+                    // The account picker dialog closed without selecting an account.
+                    // Notify users that they must pick an account to proceed.
+                    Toast.makeText(this, R.string.pick_account, Toast.LENGTH_SHORT).show();
+                } else if (resultCode == GOOGLE_REQUEST_CODE_OPENER) {
+
+                }
+            break;
+
         }
-        // Handle the result from exceptions
+
+
     }
 
 
 
-
+    // Another Shot at google drive
     public void openSceneFive(View view) {
         int rc = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         /*
@@ -166,14 +174,19 @@ public class MainActivity extends AppCompatActivity {
     final static private String APP_SECRET = "rdm2j4qcteh6oom";
     private DropboxAPI<AndroidAuthSession> mDBApi;
 
+    // Dropbox
     public void openSceneSix(View view) {
 
-        AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
-        AndroidAuthSession session = new AndroidAuthSession(appKeys);
-        mDBApi = new DropboxAPI<AndroidAuthSession>(session);
+        try {
+            AppKeyPair appKeys = new AppKeyPair(APP_KEY, APP_SECRET);
+            AndroidAuthSession session = new AndroidAuthSession(appKeys);
+            mDBApi = new DropboxAPI<AndroidAuthSession>(session);
 
-        // MyActivity below should be your activity class name
-        mDBApi.getSession().startOAuth2Authentication(MainActivity.this);
+            // MyActivity below should be your activity class name
+            mDBApi.getSession().startOAuth2Authentication(MainActivity.this);
+        } catch (Exception e) {
+
+        }
     }
 
     /*
@@ -205,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onResume() {
         super.onResume();
+        /*
         if (mDBApi.getSession().authenticationSuccessful()) {
             try {
                 // Required to complete auth, sets the access token on the session
@@ -214,12 +228,189 @@ public class MainActivity extends AppCompatActivity {
             } catch (IllegalStateException e) {
                 // Log.i("DbAuthLog", "Error authenticating", e);
             }
-        }
+        }*/
     }
 
-    // Box Client Id	    005ondupkgds3aohptzajhn63kekdrb6
-    // Box Client Secret    0YMCONrgDol5knImxR1x5YwsRLYfZ8VR
+    private static final String BOX_APP_KEY = "005ondupkgds3aohptzajhn63kekdrb6";
+    private static final String BOX_APP_SECRET =   "0YMCONrgDol5knImxR1x5YwsRLYfZ8VR";
+    private static final String BOX_REDIRECT_URI = "starterapp://localhost";
 
+    // Box
+    public void openSceneSeven(View view){
+        //Intent authIntent = OAuthActivity.createOAuthActivityIntent(MainActivity.this, BOX_APP_KEY, BOX_APP_SECRET, BOX_REDIRECT_URI, true);
+        //startActivityForResult(authIntent, BOX_REQUEST_AUTH_CODE);
+
+    }
+
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    /* Checks if external storage is available to at least read */
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
+
+    public void openSceneEight(View view) {
+        String envExternalStorageDirectory = Environment.getExternalStorageDirectory().getPath().toString();
+
+        boolean externalStorageWritable = isExternalStorageWritable();
+        boolean externalStorageReadable = isExternalStorageReadable();
+
+        int permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    this,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+
+        externalStorageWritable = isExternalStorageWritable();
+        externalStorageReadable = isExternalStorageReadable();
+
+        envExternalStorageDirectory = Environment.getExternalStorageDirectory().getPath().toString();
+
+        File mediaDir = new File(envExternalStorageDirectory);
+        if (!mediaDir.exists()){
+            mediaDir.mkdir();
+        }
+        String string = "hello world!";
+
+        try {
+
+            File resolveMeSDCard = new File(envExternalStorageDirectory + "/hello_file.txt");
+            resolveMeSDCard.createNewFile();
+            FileOutputStream fos = new FileOutputStream(resolveMeSDCard);
+            fos.write(string.getBytes());
+            fos.close();
+        } catch (Exception e) {
+            Exception d = e;
+        }
+
+    }
+
+        /*
+        try {
+            String FILENAME = "hello_file.txt";
+            String string = "hello world!";
+
+            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write(string.getBytes());
+            fos.close();
+        } catch (Exception e) {
+            Exception d = e;
+
+        }*/
+
+     /*
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == BOX_REQUEST_AUTH_CODE) {
+
+            switch (resultCode) {
+                case Activity.RESULT_OK:
+                    // An authenticated oath token object is returned upon success.
+                    Bundle bundle = data.getExtras();
+
+                    BoxAuthentication.BoxAuthenticationInfo authInfo =
+                            (BoxAuthentication.BoxAuthenticationInfo) bundle.get(OAuthActivity.AUTH_INFO);
+
+                    mBoxAPI = new BoxAPIConnection(
+                            Constants.BOX_APP_KEY, Constants.BOX_APP_SECRET,
+                            authInfo.accessToken(),
+                            authInfo.refreshToken());
+
+                    // If we are editing a source and relink it's important to reset the tokens on the source.
+                    if (editSource != null) {
+                        try {
+                            editSource.tokenaccess = authInfo.accessToken();
+                            editSource.tokensecret = authInfo.refreshToken();
+
+                            SourceData.getInstance().updateSource(editSource);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    new PopulateBoxAccountInfo().execute((Void) null);
+                    break;
+
+                case Activity.RESULT_CANCELED:
+                default:
+                    String failMessage = "";
+                    if (data == null) {
+                        failMessage = "Failed to authenticate with box (no error message).";
+                    } else {
+                        failMessage = "Another type of failure"; // data.getStringExtra(OAuthActivity.ERROR_MESSAGE);
+                    }
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Error Authenticating Box")
+                            .setMessage(failMessage)
+                            .setPositiveButton(" Ok ", new DialogInterface.OnClickListener() {
+
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .create().show();
+                    break;
+            }
+
+        }*/
+
+    public void openSceneNine(View view) {
+        // String[] listOfFiles = getActivity().getFilesDir().list();
+        File root = new File("/");
+        traverse(root);
+        // new File("/sdcard/").listFiles()
+    }
+
+
+
+
+
+
+    public void traverse (File dir) {
+        if (dir.exists()) {
+            File[] files = dir.listFiles();
+            for (int i = 0; i < files.length; ++i) {
+                File file = files[i];
+                if (file.isDirectory()) {
+                    traverse(file);
+
+
+
+                } else {
+
+                    BoyerMoore bm = new BoyerMoore();
+                    // bm.findPattern(text, pattern);
+                    // do something here with the file
+                }
+            }
+        }
+
+    }
 
 
 }

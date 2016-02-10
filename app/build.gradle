@@ -34,8 +34,10 @@ dependencies {
     compile 'com.google.android.gms:play-services-plus:8.4.0'
     compile 'com.google.android.gms:play-services-auth:8.4.0'
     compile 'com.google.android.gms:play-services-drive:8.4.0'
-*/
+    */
+
+//    compile 'com.box:box-java-sdk:2.0.0'
+//    compile 'com.box:box-android-sdk:3.0.3'
 
     testCompile 'org.robolectric:robolectric:3.0'
-
 }
