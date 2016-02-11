@@ -381,36 +381,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSceneNine(View view) {
         // String[] listOfFiles = getActivity().getFilesDir().list();
-        File root = new File("/");
-        traverse(root);
+      //  File root = new File("/");
+     //   traverse(root);
         // new File("/sdcard/").listFiles()
+
+        File root = Environment.getExternalStorageDirectory();
+        // File file = new File("/home/jtoews/Desktop/"); //boyermooretest/");
+        // File file = new File("/home/jtoews/Desktop/boyermooretest/thefile4.txt");
+        String pattern = "Font";
+        BoyerMoore.searchDirectory(root, pattern);
     }
-
-
-
-
-
-
-    public void traverse (File dir) {
-        if (dir.exists()) {
-            File[] files = dir.listFiles();
-            for (int i = 0; i < files.length; ++i) {
-                File file = files[i];
-                if (file.isDirectory()) {
-                    traverse(file);
-
-
-
-                } else {
-
-                    BoyerMoore bm = new BoyerMoore();
-                    // bm.findPattern(text, pattern);
-                    // do something here with the file
-                }
-            }
-        }
-
-    }
-
 
 }
