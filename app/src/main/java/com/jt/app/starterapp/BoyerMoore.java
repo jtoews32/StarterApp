@@ -21,10 +21,14 @@ public class BoyerMoore
         char[] pattern = p.toCharArray();
         int pos = indexOf(text, pattern);
         if (pos == -1)
-        {	return false; }//        System.out.println(" No Match"); 
+        {
+            return false;
+        }//        System.out.println(" No Match");
         // remove return false for original
         else {
-            System.out.println(filename + " -- pattern found at position first at " + pos);
+            String whatWouldBeReturned = filename + " -- pattern found at position first at " + pos;
+
+          //  System.out.println(filename + " -- pattern found at position first at " + pos);
             return true; // remove return true for original
         }
     }
@@ -147,28 +151,27 @@ public class BoyerMoore
 
                     builder = new StringBuilder();
                 }
-
-                //
-
-
-
             }
 
             bufferedReader.close();
             fileInputStream.close();
         } catch (Exception e) {
-            System.out.println( "Blahaha " + e.toString());
+
+            String whatWouldBeReturned = "Blahaha " + e.toString();
         } finally {
 
         }
 
     }
 
+
+    /*
     public static void main(String[] args) {
         File file = new File("/home/jtoews/Desktop/"); //boyermooretest/");
         // File file = new File("/home/jtoews/Desktop/boyermooretest/thefile4.txt");
         String pattern = "Font";
         BoyerMoore.searchDirectory(file, pattern);
     }
+    */
 
 }
