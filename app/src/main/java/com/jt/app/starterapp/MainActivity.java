@@ -385,12 +385,6 @@ public class MainActivity extends AppCompatActivity {
         traverse(root);
         // new File("/sdcard/").listFiles()
     }
-
-
-
-
-
-
     public void traverse (File dir) {
         if (dir.exists()) {
             File[] files = dir.listFiles();
@@ -411,6 +405,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public void openSceneTen(View view) {
+        Intent intent = new Intent(this, SceneTenListViewActivity.class);
+        startActivity(intent);
+    }
+
 
 
 }

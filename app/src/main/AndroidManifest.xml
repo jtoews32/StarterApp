@@ -32,6 +32,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_scene_two"
             android:theme="@style/FullscreenTheme" />
+        <activity
+            android:name=".SceneTenListViewActivity"
+            android:label="@string/title_activity_scene_ten" />
         <activity android:name=".SceneThreeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

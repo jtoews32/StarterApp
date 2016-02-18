@@ -15,8 +15,8 @@
     <string name="button_7">Box OAuth</string>
     <string name="button_8">Create txt File</string>
     <string name="button_9">Filesystem</string>
-    <string name="button_10">Scene 10</string>
-    <string name="button_11">Scene 11</string>
+    <string name="button_10">ListView</string>
+    <string name="button_11">JNI</string>
     <string name="button_12">Scene 12</string>
     <string name="button_13">Scene 13</string>
     <string name="button_14">Scene 14</string>
@@ -35,6 +35,7 @@
     <string name="title_activity_scene_five">Scene Five</string>
     <string name="title_activity_scene_six">Scene Six</string>
     <string name="title_activity_scene_seven">Scene Seven</string>
+    <string name="title_activity_scene_ten">Scene Ten</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
