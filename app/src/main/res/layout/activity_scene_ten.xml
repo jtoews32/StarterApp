@@ -9,21 +9,117 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.jt.app.starterapp.SceneTenListViewActivity">
 
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    
 
-    <Button
-        android:id="@+id/buttonOneMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Return"
-        android:onClick="openMain"
-        />
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:id="@+id/buttonOneMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Return"
+                android:onClick="openMain"
+                android:layout_weight="1"
+                />
+
+        </TableRow>
+
+  <!--
+        <TableRow>
+            <TextView
+                android:text="First Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1" />
+            <EditText
+                android:width="200px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+-->
+
+        <TableRow>
+
+
+
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+            </ListView>
+        </TableRow>
+
+<!--
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingBar"
+                android:layout_column="2" />
+        </TableRow>
+-->
+
+        <!--
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+
+            <Button
+                android:id="@+id/buttonOneMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Return"
+                android:onClick="openMain"
+                />
+
+        </TableRow>
+        -->
+
+ <!--
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ListView
+                android:id="@+id/listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+            </ListView>
+
+        </TableRow>
+
+ -->
+
+
+    </TableLayout>
+
+
 </RelativeLayout>
+
+
+
+
+
+    <!--
+        <Button
+            android:id="@+id/buttonOneMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Return"
+            android:onClick="openMain"
+            android:layout_weight="3"
+            />
+            -->
+
+
 
 

@@ -5,6 +5,7 @@ import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
@@ -309,76 +310,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-        /*
-        try {
-            String FILENAME = "hello_file.txt";
-            String string = "hello world!";
-
-            FileOutputStream fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            fos.write(string.getBytes());
-            fos.close();
-        } catch (Exception e) {
-            Exception d = e;
-
-        }*/
-
-     /*
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == BOX_REQUEST_AUTH_CODE) {
-
-            switch (resultCode) {
-                case Activity.RESULT_OK:
-                    // An authenticated oath token object is returned upon success.
-                    Bundle bundle = data.getExtras();
-
-                    BoxAuthentication.BoxAuthenticationInfo authInfo =
-                            (BoxAuthentication.BoxAuthenticationInfo) bundle.get(OAuthActivity.AUTH_INFO);
-
-                    mBoxAPI = new BoxAPIConnection(
-                            Constants.BOX_APP_KEY, Constants.BOX_APP_SECRET,
-                            authInfo.accessToken(),
-                            authInfo.refreshToken());
-
-                    // If we are editing a source and relink it's important to reset the tokens on the source.
-                    if (editSource != null) {
-                        try {
-                            editSource.tokenaccess = authInfo.accessToken();
-                            editSource.tokensecret = authInfo.refreshToken();
-
-                            SourceData.getInstance().updateSource(editSource);
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    new PopulateBoxAccountInfo().execute((Void) null);
-                    break;
-
-                case Activity.RESULT_CANCELED:
-                default:
-                    String failMessage = "";
-                    if (data == null) {
-                        failMessage = "Failed to authenticate with box (no error message).";
-                    } else {
-                        failMessage = "Another type of failure"; // data.getStringExtra(OAuthActivity.ERROR_MESSAGE);
-                    }
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Error Authenticating Box")
-                            .setMessage(failMessage)
-                            .setPositiveButton(" Ok ", new DialogInterface.OnClickListener() {
-
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .create().show();
-                    break;
-            }
-
-        }*/
-
     public void openSceneNine(View view) {
         // String[] listOfFiles = getActivity().getFilesDir().list();
       //  File root = new File("/");
@@ -397,5 +328,37 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SceneTenListViewActivity.class);
         startActivity(intent);
     }
+
+    public void openSceneEleven(View view) {
+        Intent intent = new Intent(this, SceneElevenFrameLayoutActivity.class);
+        startActivity(intent);
+    }
+
+    public void openSceneTwelve(View view) {
+        final String appPackageName = "fr.xgouchet.texteditor"; // getPackageName();
+
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
+    }
+
+    public void openSceneThirteen(View view) {
+        final String appPackageName = "net.appositedesigns.fileexplorer"; // getPackageName();
+
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
+    }
+
+
+
+
+
+
+
 
 }

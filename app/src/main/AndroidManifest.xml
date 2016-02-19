@@ -35,6 +35,10 @@
         <activity
             android:name=".SceneTenListViewActivity"
             android:label="@string/title_activity_scene_ten" />
+        <activity
+            android:name=".SceneElevenFrameLayoutActivity"
+            android:label="@string/title_activity_scene_eleven" />
+
         <activity android:name=".SceneThreeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

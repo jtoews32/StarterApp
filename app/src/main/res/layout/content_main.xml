@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/button_11"
-            android:onClick="openSceneTwo" >
+            android:onClick="openSceneEleven" >
         </Button>
 
         <Button
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/button_12"
-            android:onClick="openSceneTwo" >
+            android:onClick="openSceneTwelve" >
         </Button>
 
         <Button
@@ -123,7 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/button_13"
-            android:onClick="openSceneTwo" >
+            android:onClick="openSceneThirteen" >
         </Button>
 
         <Button
